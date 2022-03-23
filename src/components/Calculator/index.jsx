@@ -1,13 +1,23 @@
 import React from "react";
+import {HiBackspace} from 'react-icons/hi';
 
 import { Button } from "../Button";
+import { CompleteOperation } from "../CompleteOperation";
 import { NummberView } from "../NumberView";
 
-import { Container, ButtonContainer, NumberViewContainer } from "./style";
+import {
+  Container,
+  ButtonContainer,
+  NumberViewContainer,
+  CompleteOperationContainer,
+} from "./style";
 
 export const Calculator = (params) => {
   return (
     <Container>
+      <CompleteOperationContainer>
+        <CompleteOperation />
+      </CompleteOperationContainer>
       <NumberViewContainer>
         <NummberView />
       </NumberViewContainer>
@@ -44,7 +54,7 @@ export const Calculator = (params) => {
         </Button>
         <Button type={"button"}>0</Button>
         <Button type={"button"}>.</Button>
-        <Button type={"button"}>clear</Button>
+        <Button type={"button"}><HiBackspace/></Button>
       </ButtonContainer>
     </Container>
   );

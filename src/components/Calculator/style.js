@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { theme } from "../../style/GlobalStyle";
 
 export const Container = styled.div`
   width: 60%;
@@ -13,13 +12,25 @@ export const Container = styled.div`
   border-radius: 5px;
 `;
 
+export const CompleteOperationContainer = styled.div`
+  width: 100%;
+  text-align: right;
+  padding: 0px 5px;
+
+  h3 {
+    color: ${props => props.theme.colors.dark_lighter_background};
+    font-size: ${props => props.theme.fontSizes.small};
+  }
+`
+
 export const NumberViewContainer = styled.div`
   width: 100%;
+  text-align: right;
+  margin: 10px;
 
   h1 {
     font-size: ${props => props.theme.fontSizes.x_large};
     font-weight:normal;
-    text-align: right;
   }
 
 `
@@ -41,6 +52,9 @@ export const ButtonContainer = styled.div`
     font-size: ${props => props.theme.fontSizes.medium};
     font-weight: bold;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:hover {
         background-color: ${props => props.theme.colors.dark_light_hover_background};
