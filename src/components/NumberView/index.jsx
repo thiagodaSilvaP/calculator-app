@@ -1,5 +1,5 @@
-export const NummberView = () => {
+export const NummberView = ({number}) => {
     return(
-        <h1>20</h1>
+        <h1>{number}</h1>
     )
 };
