@@ -23,7 +23,10 @@ function reducer(state, action) {
       }
       return (state += action.payload);
     case 'RemoveLastCharacter':
-      return state.substr(-1, state.length)
+      if (state.length == 1) {
+        return state = '0'
+      }
+      return state.substr(0, state.length -1)
     default:
       console.log(nada);
   }
@@ -112,7 +115,7 @@ export const Calculator = (params) => {
         <Button type={"button"} onClick={() => handleChangeCurrentNumber(".", 'insert')}>
           .
         </Button>
-        <Button type={"button"} >
+        <Button type={"button"} onClick={() => handleChangeCurrentNumber("<", 'remove')}>
           <HiBackspace />
         </Button>
       </ButtonContainer>
