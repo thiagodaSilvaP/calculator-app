@@ -10,7 +10,19 @@ export const Container = styled.div`
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
+  border-radius: 5px;
 `;
+
+export const NumberViewContainer = styled.div`
+  width: 100%;
+
+  h1 {
+    font-size: ${props => props.theme.fontSizes.x_large};
+    font-weight:normal;
+    text-align: right;
+  }
+
+`
 
 export const ButtonContainer = styled.div`
   width: 100%;
