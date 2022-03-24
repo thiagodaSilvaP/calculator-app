@@ -50,8 +50,15 @@ export const Calculator = () => {
   };
   const handleChangeTotalOperation = (operation) => {
     setTotalOperation(prev => prev += state + operation)
+    const result = eval(totalOperation + state).toString()
     dispatch({type: 'reset'})
-    console.log(totalOperation);
+    dispatch({type: 'insertCharacter', payload: result})
+  }
+  const handleResult = () => {
+    setTotalOperation(prev => prev += state)
+    const result = eval(totalOperation + state).toString()
+    dispatch({type: 'reset'})
+    dispatch({type: 'insertCharacter', payload: result})
   }
   return (
     <Container>
@@ -107,7 +114,7 @@ export const Calculator = () => {
         <Button type={"button"} onClick={() => handleChangeCurrentNumber("3", 'insert')}>
           3
         </Button>
-        <Button type={"button"} id="result-button">
+        <Button type={"button"} id="result-button" onClick={handleResult}>
           =
         </Button>
         <Button type={"button"} onClick={() => handleChangeCurrentNumber("0", 'insert')}>
