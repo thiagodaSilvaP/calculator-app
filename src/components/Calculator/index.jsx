@@ -16,6 +16,9 @@ function reducer(state, action) {
   switch (action.type) {
     case "insertCharacter":
       if (state === "0") {
+        if (action.payload === '.') {
+          return state += '.'
+        }
         return action.payload;
       }
       if (state.includes(".") && action.payload === ".") {
@@ -27,14 +30,16 @@ function reducer(state, action) {
         return state = '0'
       }
       return state.substr(0, state.length -1)
+    case 'reset':
+      return state = '0'
     default:
       console.log(nada);
   }
 }
 
-export const Calculator = (params) => {
-  // const [currentNumber, setCurrentNumber] = useState("0");
+export const Calculator = () => {
   const [state, dispatch] = useReducer(reducer, "0");
+  const [totalOperation, setTotalOperation] = useState('');
 
   const handleChangeCurrentNumber = (number, action) => {
     if (action === 'insert') {
@@ -42,35 +47,31 @@ export const Calculator = (params) => {
     } else {
       dispatch({type: 'RemoveLastCharacter'})
     }
-    // setCurrentNumber((prev) => {
-    //   if (prev === "0") {
-    //     return number;
-    //   }
-    //   if (prev.includes(".") && number === ".") {
-    //     return prev;
-    //   }
-    //   return (prev += number);
-    // });
   };
+  const handleChangeTotalOperation = (operation) => {
+    setTotalOperation(prev => prev += state + operation)
+    dispatch({type: 'reset'})
+    console.log(totalOperation);
+  }
   return (
     <Container>
       <CompleteOperationContainer>
-        <CompleteOperation />
+        <CompleteOperation operation={totalOperation || '0'}/>
       </CompleteOperationContainer>
       <NumberViewContainer>
         <NummberView number={state} />
       </NumberViewContainer>
       <ButtonContainer>
-        <Button type={"button"} className="button-operator">
+        <Button type={"button"} className="button-operator" >
           C
         </Button>
         <Button type={"button"} className="button-operator">
           %
         </Button>
-        <Button type={"button"} className="button-operator">
+        <Button type={"button"} className="button-operator" onClick={() => handleChangeTotalOperation('÷')}>
           ÷
         </Button>
-        <Button type={"button"} className="button-operator">
+        <Button type={"button"} className="button-operator" onClick={() => handleChangeTotalOperation('x')}>
           x
         </Button>
         <Button type={"button"} onClick={() => handleChangeCurrentNumber("7", 'insert')}>
@@ -82,7 +83,7 @@ export const Calculator = (params) => {
         <Button type={"button"} onClick={() => handleChangeCurrentNumber("9", 'insert')}>
           9
         </Button>
-        <Button type={"button"} className="button-operator">
+        <Button type={"button"} className="button-operator" onClick={() => handleChangeTotalOperation('-')}>
           -
         </Button>
         <Button type={"button"} onClick={() => handleChangeCurrentNumber("4", 'insert')}>
@@ -94,7 +95,7 @@ export const Calculator = (params) => {
         <Button type={"button"} onClick={() => handleChangeCurrentNumber("6", 'insert')}>
           6
         </Button>
-        <Button type={"button"} className="button-operator">
+        <Button type={"button"} className="button-operator" onClick={() => handleChangeTotalOperation('+')}>
           +
         </Button>
         <Button type={"button"} onClick={() => handleChangeCurrentNumber("1", 'insert')}>

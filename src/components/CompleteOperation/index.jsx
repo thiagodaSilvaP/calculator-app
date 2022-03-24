@@ -1,5 +1,5 @@
-export const CompleteOperation = () => {
+export const CompleteOperation = ({operation}) => {
     return (
-        <h3>15 + 4 + 5</h3>
+        <h3>{operation}</h3>
     )
 };
