@@ -56,9 +56,20 @@ export const Calculator = () => {
   }
   const handleResult = () => {
     setTotalOperation(prev => prev += state)
-    const result = eval(totalOperation + state).toString()
+    
+    const newOperation = totalOperation.replace('x', '*').replace('÷', '/')
+    console.log(newOperation);
+
+
+    const result = eval(newOperation + state).toString()
     dispatch({type: 'reset'})
     dispatch({type: 'insertCharacter', payload: result})
+    setTotalOperation('')
+  }
+
+  const handleReset = () => {
+    dispatch({type: 'reset'})
+    setTotalOperation('')
   }
   return (
     <Container>
@@ -69,7 +80,7 @@ export const Calculator = () => {
         <NummberView number={state} />
       </NumberViewContainer>
       <ButtonContainer>
-        <Button type={"button"} className="button-operator" >
+        <Button type={"button"} className="button-operator" onClick={handleReset}>
           C
         </Button>
         <Button type={"button"} className="button-operator">
