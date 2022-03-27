@@ -10,6 +10,10 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: column;
   border-radius: 5px;
+
+  @media (min-width: 800px) {
+    width: 500px;
+  }
 `;
 
 export const CompleteOperationContainer = styled.div`
